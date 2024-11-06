@@ -30,13 +30,22 @@ classifiers = [
 urls.download = "https://github.com/dhamm97/pyxu-diffops"
 dependencies = [
     # "pyxu >= 2.0, < 3",
-    "pyxu",
+    #"pyxu",
+    "pyxu @ git+https://github.com/pyxu-org/pyxu.git@v2.0b5",
 ]
 
 # entry_points; Note the `_` underscore to overload a base Pyxu class.
 [project.entry-points."pyxu.operator"]
-Flip = "pyxu_diffops:Flip"
-_NullFunc = "pyxu_diffops:NullFunc"
+MfiDiffusion = "pyxu_diffops.operator:MfiDiffusion"
+PeronaMalikDiffusion = "pyxu_diffops.operator:PeronaMalikDiffusion"
+TikhonovDiffusion = "pyxu_diffops.operator:TikhonovDiffusion"
+TotalVariationDiffusion = "pyxu_diffops.operator:TotalVariationDiffusion"
+diffusion = "pyxu_diffops.operator.diffusion"
+#CurvaturePreservingDiffusion = "pyxu_diffops:operator:CurvaturePreservingDiffusion"
+#AnisEdgeEnhancingDiffusion = "pyxu_diffops:operator:AnisEdgeEnhancingDiffusion"
+#AnisCoherenceEnhancingDiffusion = "pyxu_diffops:operator:AnisCoherenceEnhancingDiffusion"
+#AnisDiffusion = "pyxu_diffops:operator:AnisDiffusion"
+
 
 
 # Optional dependencies =======================================================
@@ -60,3 +69,7 @@ include = [
 packages = [
     "src/pyxu_diffops",
 ]
+
+# Allow direct references in dependencies =====================================
+[tool.hatch.metadata]
+allow-direct-references = true

@@ -1,4 +1,2 @@
-from .linop import Flip
-from .func import NullFunc
-
-__all__ = ["Flip", "NullFunc"]
+from pyxu_diffops.operator.diffusion import *
+from pyxu_diffops.operator.diffusion.diffusion import *

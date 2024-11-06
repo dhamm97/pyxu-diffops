@@ -1,13 +1,8 @@
-Plugin Documentation
-####################
-
-The documentation is written in reStructuredText and processed by Sphinx.
-
-See http://sphinx-doc.org/ for more information about Sphinx.
-
+Pyxu_diffops Documentation
+##########################
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :hidden:
 
    api/index

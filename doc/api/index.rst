@@ -16,13 +16,16 @@ it is a technical resource aimed at users who are already familiar with Pyxu.
 Subpackages
 -----------
 
-pyxu.operator
-^^^^^^^^^^^^^
+pyxu_diffops.operator
+^^^^^^^^^^^^^^^^^^^^^
 
 .. autosummary::
 
-   ~pyxu.operator.Flip
-   ~pyxu.operator.NullFunc
+   ~pyxu_diffops.operator.MfiDiffusion
+   ~pyxu_diffops.operator.PeronaMalikDiffusion
+   ~pyxu_diffops.operator.TikhonovDiffusion
+   ~pyxu_diffops.operator.TotalVariationDiffusion
+
 
 .. toctree::
    :maxdepth: 2
