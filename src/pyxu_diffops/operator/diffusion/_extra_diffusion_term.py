@@ -161,7 +161,7 @@ class MfiExtraTerm(_ExtraDiffusionTerm):
         if tame:
             self.lipschitz = 1
         else:
-            self.lipschitz = beta / clipping_value
+            self.lipschitz = 1 / clipping_value
 
     # @pycrt.enforce_precision(i="arr")
     def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
@@ -170,11 +170,13 @@ class MfiExtraTerm(_ExtraDiffusionTerm):
         y **= 2
         y = xp.sum(y, axis=-4, keepdims=False)  # (batch,nchannels,nx,ny)
         z = xp.clip(arr, self.clipping_value, None)
-        z /= self.beta
         if self.tame:
+            z /= self.beta
             z += 1
         z **= -2
-        z /= 2 * self.beta
+        z /= 2
+        if self.tame:
+            z /= self.beta
         return y * z  # (batch,nchannels,nx,ny)
 
 

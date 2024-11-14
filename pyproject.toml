@@ -40,12 +40,11 @@ MfiDiffusion = "pyxu_diffops.operator:MfiDiffusion"
 PeronaMalikDiffusion = "pyxu_diffops.operator:PeronaMalikDiffusion"
 TikhonovDiffusion = "pyxu_diffops.operator:TikhonovDiffusion"
 TotalVariationDiffusion = "pyxu_diffops.operator:TotalVariationDiffusion"
+CurvaturePreservingDiffusionOp = "pyxu_diffops.operator:CurvaturePreservingDiffusionOp"
+AnisEdgeEnhancingDiffusionOp = "pyxu_diffops.operator:AnisEdgeEnhancingDiffusionOp"
+AnisCoherenceEnhancingDiffusionOp = "pyxu_diffops.operator:AnisCoherenceEnhancingDiffusionOp"
+AnisDiffusionOp = "pyxu_diffops.operator:AnisDiffusionOp"
 diffusion = "pyxu_diffops.operator.diffusion"
-#CurvaturePreservingDiffusion = "pyxu_diffops:operator:CurvaturePreservingDiffusion"
-#AnisEdgeEnhancingDiffusion = "pyxu_diffops:operator:AnisEdgeEnhancingDiffusion"
-#AnisCoherenceEnhancingDiffusion = "pyxu_diffops:operator:AnisCoherenceEnhancingDiffusion"
-#AnisDiffusion = "pyxu_diffops:operator:AnisDiffusion"
-
 
 
 # Optional dependencies =======================================================

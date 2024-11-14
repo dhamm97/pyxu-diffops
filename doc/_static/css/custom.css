@@ -19,13 +19,13 @@ display: inline-block !important;
 /* -------------------- THEME OVERRIDES -------------------- */
 
 html[data-theme="light"] {
-  --pst-color-primary:  rgb(56 99 235);
+  --pst-color-primary:  rgb(235 99 56);
   --pst-color-secondary: rgb(245, 188, 71);
   --pst-color-plot-background: rgb(255, 255, 255);
 }
 
 html[data-theme="dark"] {
-  --pst-color-primary:  rgb(56 99 235);
+  --pst-color-primary:  rgb(235 99 56);
   --pst-color-secondary: rgb(245, 188, 71);
   --pst-color-plot-background: rgb(218, 219, 220);
 }
@@ -49,13 +49,13 @@ html[data-theme="dark"] {
 /* Titles */
 
 h1 {
-    background: linear-gradient(to right, var(--pst-color-primary), rgb(56 99 235));
+    background: linear-gradient(to right, var(--pst-color-primary), rgb(245 188 71));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
     }
 h2 {
-background: linear-gradient(to right, var(--pst-color-primary), rgb(56 99 235));
+background: linear-gradient(to right, var(--pst-color-primary), rgb(245 188 71));
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 }

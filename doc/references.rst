@@ -1,4 +1,5 @@
 **References**
 ==============
 
-.. [Nesterov] Nesterov, Yurii Evgen'evich. "A method of solving a convex programming problem with convergence rate O(k^{2})." Doklady Akademii Nauk. Vol. 269. No. 3. Russian Academy of Sciences, 1983.
+.. [Weickert] Weickert J. "Anisotropic Diffusion in Image Processing." Vol. 1. Teubner Stuttgart, 1998.
+.. [Tschumperle] Tschumperle D., Deriche R. "Vecotr-valued image regularization with PDEs: a common framework for different applications." IEEE Transacations on Pattern Analysis and Machine Intelligence, 27. 2005.

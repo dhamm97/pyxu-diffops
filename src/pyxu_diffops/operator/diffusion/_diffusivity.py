@@ -294,7 +294,7 @@ class MfiDiffusivity(_Diffusivity):
         if tame:
             self.upper_bound = 1
         else:
-            self.upper_bound = beta / clipping_value
+            self.upper_bound = 1 / clipping_value
 
     # @pycrt.enforce_precision(i="arr")
     def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
@@ -309,8 +309,8 @@ class MfiDiffusivity(_Diffusivity):
             # y = arr / xp.mean(arr) this was uncommented!
 
             y = xp.clip(arr, self.clipping_value, None)
-            y /= self.beta
             if self.tame:
+                y /= self.beta
                 y += 1
             return 1 / y  # (batch,nchannels,nx,ny)
         else:
