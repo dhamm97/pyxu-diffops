@@ -49,11 +49,8 @@ jobs:
 
       - name: Remove Pyxu-diffops repository
         run: |
-          cd pyxu-diffops
-          mv * todelete/ | mkdir todelete
-          mv todelete/build/html/* ./
-          rm -rf todelete
-          cd ../
+          mv pyxu-diffops/build/html/* ./
+          rm -rf pyxu-diffops
 
       - name: Commit changes
         run: |
