@@ -50,7 +50,7 @@ jobs:
       - name: Remove Pyxu-diffops repository
         run: |
           mv pyxu-diffops/build/html/* ./
-          rm -rf pyxu-diffops
+          rm -rf pyxu-diffops .github
 
       - name: Commit changes
         run: |
