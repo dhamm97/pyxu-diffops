@@ -49,10 +49,11 @@ jobs:
 
       - name: Remove Pyxu-diffops repository
         run: |
-          mkdir todelete
-          mv * todelete/
+          cd pyxu-diffops
+          mv * todelete/ | mkdir todelete
           mv todelete/build/html/* ./
           rm -rf todelete
+          cd ../
 
       - name: Commit changes
         run: |
