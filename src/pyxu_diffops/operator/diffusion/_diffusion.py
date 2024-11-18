@@ -415,7 +415,7 @@ class _Diffusion(pyca.DiffFunc):
         )
         Dx[-1, -1] = 0  # symmetric boundary conditions, no flux
         Dy = -xp.diag(xp.ones(self.dim_shape[2]) / self.sampling[2]) + xp.diag(
-            xp.ones(self.dim_shape[1] - 1) / self.sampling[2], 1
+            xp.ones(self.dim_shape[2] - 1) / self.sampling[2], 1
         )
         Dy[-1, -1] = 0  # symmetric boundary conditions, no flux
         # define gradient matrix
