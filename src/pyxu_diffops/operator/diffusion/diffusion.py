@@ -855,6 +855,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
         )
         self.freezing_arr = freezing_arr
         if self.freezing_arr is not None:
+            if len(self.freezing_arr.shape) == len(dim_shape) - 1:
+                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
             edge_enh_diffusion_coeff.freeze(self.freezing_arr)
         super().__init__(
             dim_shape,
@@ -1036,6 +1038,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
         )
         self.freezing_arr = freezing_arr
         if self.freezing_arr is not None:
+            if len(self.freezing_arr.shape) == len(dim_shape) - 1:
+                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
             coh_enh_diffusion_coeff.freeze(freezing_arr)
         super().__init__(
             dim_shape,
@@ -1155,6 +1159,8 @@ class AnisDiffusionOp(_Diffusion):
         )
         self.freezing_arr = freezing_arr
         if self.freezing_arr is not None:
+            if len(self.freezing_arr.shape) == len(dim_shape) - 1:
+                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
             anis_diffusion_coeff.freeze(freezing_arr)
         super().__init__(
             dim_shape,
