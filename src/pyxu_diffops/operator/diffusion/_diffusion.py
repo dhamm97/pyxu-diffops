@@ -428,10 +428,13 @@ class _Diffusion(pyca.DiffFunc):
             + xp.diag(diff_coeff_tensor[0, 1, :, :].flatten(), self.dim_size)
             + xp.diag(diff_coeff_tensor[1, 0, :, :].flatten(), -self.dim_size)
         )
-        # assemble matrix-version of diffusion operator
-        L = D.T @ W @ D
+
         if is_numpy:
-            L = sp.csr_matrix(L)
+            # make matrices sparse
+            D_sp = sp.csr_matrix(D)
+            W_sp = sp.csr_matrix(W)
+            # assemble matrix-version of diffusion operator
+            L = D_sp.T @ W_sp @ D_sp
         elif is_cupy:
             # TODO: modify to allow GPU implementation
             ...
