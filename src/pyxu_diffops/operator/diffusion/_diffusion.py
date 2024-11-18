@@ -410,12 +410,12 @@ class _Diffusion(pyca.DiffFunc):
         N = pycd.NDArrayInfo
         is_numpy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.NUMPY
         is_cupy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.CUPY
-        Dx = -xp.diag(xp.ones(self.dim_shape[1]) / self.sampling) + xp.diag(
-            xp.ones(self.dim_shape[1] - 1) / self.sampling, 1
+        Dx = -xp.diag(xp.ones(self.dim_shape[1]) / self.sampling[1]) + xp.diag(
+            xp.ones(self.dim_shape[1] - 1) / self.sampling[1], 1
         )
         Dx[-1, -1] = 0  # symmetric boundary conditions, no flux
-        Dy = -xp.diag(xp.ones(self.dim_shape[2]) / self.sampling) + xp.diag(
-            xp.ones(self.dim_shape[1] - 1) / self.sampling, 1
+        Dy = -xp.diag(xp.ones(self.dim_shape[2]) / self.sampling[2]) + xp.diag(
+            xp.ones(self.dim_shape[1] - 1) / self.sampling[2], 1
         )
         Dy[-1, -1] = 0  # symmetric boundary conditions, no flux
         # define gradient matrix
