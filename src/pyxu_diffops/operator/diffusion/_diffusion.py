@@ -1,3 +1,4 @@
+import typing as typ
 import warnings
 
 import numpy as np
@@ -148,6 +149,7 @@ class _Diffusion(pyca.DiffFunc):
         outer_trace_diffusivity: pyct.OpT = None,
         trace_diffusion_coefficient: pyct.OpT = None,
         matrix_based_impl: bool = False,
+        dtype: typ.Optional[pyct.DType] = None,
     ):
         r"""
 
@@ -231,6 +233,7 @@ class _Diffusion(pyca.DiffFunc):
         self.gradient = gradient
         self.hessian = hessian
         self.matrix_based_impl = matrix_based_impl
+        self.dtype = dtype if dtype is not None else np.float64
         if matrix_based_impl:
             self._assemble_matrix_based()
         # set lipschitz and diff_lipschitz to np.inf
@@ -431,19 +434,20 @@ class _Diffusion(pyca.DiffFunc):
 
         if is_numpy:
             # make matrices sparse
-            D_sp = sp.csr_matrix(D)
-            W_sp = sp.csr_matrix(W)
-            # assemble matrix-version of diffusion operator
-            L = D_sp.T @ W_sp @ D_sp
+            D_sp = sp.csr_matrix(D, dtype=self.dtype)
+            W_sp = sp.csr_matrix(W, dtype=self.dtype)
         elif is_cupy:
-            # TODO: modify to allow GPU implementation
-            ...
-            # L = csp.csr_matrix(L)
+            import cupyx.scipy.sparse as csp
+
+            # make matrices sparse
+            D_sp = csp.csr_matrix(D, dtype=self.dtype)
+            W_sp = csp.csr_matrix(W, dtype=self.dtype)
         else:
             raise Warning(
                 "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient. Assembling full matrices."
             )
-
+        # assemble matrix-version of diffusion operator
+        L = D_sp.T @ W_sp @ D_sp
         self._grad_matrix_based = pyca.LinOp.from_array(L)
 
     def asloss(self, data: pyct.NDArray = None) -> NotImplemented:

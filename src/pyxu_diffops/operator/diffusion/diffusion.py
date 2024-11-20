@@ -833,6 +833,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
         sampling: typ.Union[pyct.Real, cabc.Sequence[pyct.Real, ...]] = 1,
         freezing_arr: pyct.NDArray = None,
         matrix_based_impl: bool = False,
+        gpu: bool = False,
+        dtype: typ.Optional[pyct.DType] = None,
     ):
         gradient = pydiff.Gradient(
             dim_shape=dim_shape,
@@ -841,6 +843,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
             scheme="forward",
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         structure_tensor = pyfilt.StructureTensor(
             dim_shape=dim_shape[1:],
@@ -849,6 +853,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
             sigma=sigma_gd_st,
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         edge_enh_diffusion_coeff = DiffusionCoeffAnisoEdgeEnhancing(
             dim_shape=dim_shape, structure_tensor=structure_tensor, beta=beta, m=m
@@ -856,7 +862,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
         self.freezing_arr = freezing_arr
         if freezing_arr is not None:
             if len(freezing_arr.shape) == len(dim_shape) - 1:
-                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
+                xp = pycu.get_array_module(freezing_arr)
+                self.freezing_arr = xp.expand_dims(freezing_arr, axis=0)
             edge_enh_diffusion_coeff.freeze(self.freezing_arr)
         super().__init__(
             dim_shape,
@@ -1016,6 +1023,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
         diff_method_struct_tens: str = "gd",
         freezing_arr: pyct.NDArray = None,
         matrix_based_impl: bool = False,
+        gpu: bool = False,
+        dtype: typ.Optional[pyct.DType] = None,
     ):
         gradient = pydiff.Gradient(
             dim_shape=dim_shape,
@@ -1024,6 +1033,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
             scheme="forward",
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         structure_tensor = pyfilt.StructureTensor(
             dim_shape=dim_shape[1:],
@@ -1032,6 +1043,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
             sigma=sigma_gd_st,
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         coh_enh_diffusion_coeff = DiffusionCoeffAnisoCoherenceEnhancing(
             dim_shape=dim_shape, structure_tensor=structure_tensor, alpha=alpha, m=m
@@ -1039,7 +1052,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
         self.freezing_arr = freezing_arr
         if freezing_arr is not None:
             if len(freezing_arr.shape) == len(dim_shape) - 1:
-                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
+                xp = pycu.get_array_module(freezing_arr)
+                self.freezing_arr = xp.expand_dims(freezing_arr, axis=0)
             coh_enh_diffusion_coeff.freeze(self.freezing_arr)
         super().__init__(
             dim_shape,
@@ -1137,6 +1151,8 @@ class AnisDiffusionOp(_Diffusion):
         diff_method_struct_tens: str = "fd",
         freezing_arr: pyct.NDArray = None,
         matrix_based_impl: bool = False,
+        gpu: bool = False,
+        dtype: typ.Optional[pyct.DType] = None,
     ):
         gradient = pydiff.Gradient(
             dim_shape=dim_shape,
@@ -1145,6 +1161,8 @@ class AnisDiffusionOp(_Diffusion):
             scheme="forward",
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         structure_tensor = pyfilt.StructureTensor(
             dim_shape=dim_shape[1:],
@@ -1153,6 +1171,8 @@ class AnisDiffusionOp(_Diffusion):
             sigma=sigma_gd_st,
             mode="symmetric",
             sampling=sampling,
+            gpu=gpu,
+            dtype=dtype,
         )
         anis_diffusion_coeff = DiffusionCoeffAnisotropic(
             dim_shape=dim_shape, structure_tensor=structure_tensor, alpha=alpha
@@ -1160,7 +1180,8 @@ class AnisDiffusionOp(_Diffusion):
         self.freezing_arr = freezing_arr
         if freezing_arr is not None:
             if len(freezing_arr.shape) == len(dim_shape) - 1:
-                self.freezing_arr = np.expand_dims(freezing_arr, axis=0)
+                xp = pycu.get_array_module(freezing_arr)
+                self.freezing_arr = xp.expand_dims(freezing_arr, axis=0)
             anis_diffusion_coeff.freeze(self.freezing_arr)
         super().__init__(
             dim_shape,
