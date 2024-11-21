@@ -419,19 +419,15 @@ class _Diffusion(pyca.DiffFunc):
                 "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient. Set 'matrix_based_imple' to 'False'"
             )
 
-        Dx = xsp.spdiags(
+        Dx = xsp.diags(
             [-xp.ones(self.dim_shape[1]) / self.sampling[1], xp.ones(self.dim_shape[1] - 1) / self.sampling[1]],
-            diags=[0, 1],
-            m=self.dim_size,
-            n=self.dim_size,
+            offsets=[0, 1],
             format="csr",
         )
         Dx[-1, -1] = 0  # symmetric boundary conditions, no flux
-        Dy = xsp.spdiags(
+        Dy = xsp.diags(
             [-xp.ones(self.dim_shape[2]) / self.sampling[2], xp.ones(self.dim_shape[2] - 1) / self.sampling[2]],
-            diags=[0, 1],
-            m=self.dim_size,
-            n=self.dim_size,
+            offsets=[0, 1],
             format="csr",
         )
         Dy[-1, -1] = 0  # symmetric boundary conditions, no flux
@@ -446,16 +442,15 @@ class _Diffusion(pyca.DiffFunc):
         diff_coeff_tensor = diff_coeff_tensor.squeeze()  # (2,2,nx,ny)
         diff_coeff_tensor = diff_coeff_tensor.astype(self.dtype)
         # assemble diffusion tensor matrix
-        W = xsp.spdiags(
+        W = xsp.diags(
             [
                 xp.hstack((diff_coeff_tensor[0, 0, :, :].flatten(), diff_coeff_tensor[1, 1, :, :].flatten())),
                 diff_coeff_tensor[0, 1, :, :].flatten(),
                 diff_coeff_tensor[1, 0, :, :].flatten(),
             ],
-            diags=[0, self.dim_size, -self.dim_size],
-            m=2 * self.dim_size,
-            n=2 * self.dim_size,
+            offsets=[0, self.dim_size, -self.dim_size],
             format="csr",
+            dtype=self.dtype,
         )
         # assemble gradient matrix
         L = D.T @ W @ D
