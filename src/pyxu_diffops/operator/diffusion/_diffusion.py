@@ -404,50 +404,61 @@ class _Diffusion(pyca.DiffFunc):
         )
 
     def _assemble_matrix_based(self):
-        # VERY CAREFUL WITH DIFF_LIPSCHITZ! IF I WANT TO USE PREVIOUS ONE, I NEED TO DIVIDE Dx, Dy BY SAMPLING, right?
-        # currently implemented with this division. monitor situatino and remember.
-
         # Assemble matrix-based version of the operator.
         # Can lead to significant speed-up for frozen diffusion coefficients when input size is fairly small.
         xp = pycu.get_array_module(self.diffusion_coefficient.frozen_coeff)
         N = pycd.NDArrayInfo
         is_numpy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.NUMPY
         is_cupy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.CUPY
-        Dx = -xp.diag(xp.ones(self.dim_shape[1]) / self.sampling[1]) + xp.diag(
-            xp.ones(self.dim_shape[1] - 1) / self.sampling[1], 1
+        if is_numpy:
+            xsp = sp
+        elif is_cupy:
+            import cupyx.scipy.sparse as xsp
+        else:
+            raise TypeError(
+                "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient. Set 'matrix_based_imple' to 'False'"
+            )
+
+        Dx = xsp.spdiags(
+            [-xp.ones(self.dim_shape[1]) / self.sampling[1], xp.ones(self.dim_shape[1] - 1) / self.sampling[1]],
+            diags=[0, 1],
+            m=self.dim_size,
+            n=self.dim_size,
+            format="csr",
         )
         Dx[-1, -1] = 0  # symmetric boundary conditions, no flux
-        Dy = -xp.diag(xp.ones(self.dim_shape[2]) / self.sampling[2]) + xp.diag(
-            xp.ones(self.dim_shape[2] - 1) / self.sampling[2], 1
+        Dy = xsp.spdiags(
+            [-xp.ones(self.dim_shape[2]) / self.sampling[2], xp.ones(self.dim_shape[2] - 1) / self.sampling[2]],
+            diags=[0, 1],
+            m=self.dim_size,
+            n=self.dim_size,
+            format="csr",
         )
         Dy[-1, -1] = 0  # symmetric boundary conditions, no flux
         # define gradient matrix
-        D = xp.vstack((xp.kron(Dx, xp.eye(self.dim_shape[2])), xp.kron(xp.eye(self.dim_shape[1]), Dy)))
+        D = xsp.vstack(
+            (xsp.kron(Dx, xsp.eye(self.dim_shape[2])), xsp.kron(xsp.eye(self.dim_shape[1]), Dy)),
+            format="csr",
+            dtype=self.dtype,
+        )
         # assemble diffusion tensor as full matrix
         diff_coeff_tensor = self.diffusion_coefficient.frozen_coeff  # (2,2,nchannels=1,nx,ny)
         diff_coeff_tensor = diff_coeff_tensor.squeeze()  # (2,2,nx,ny)
-        W = (
-            xp.diag(xp.hstack((diff_coeff_tensor[0, 0, :, :].flatten(), diff_coeff_tensor[1, 1, :, :].flatten())))
-            + xp.diag(diff_coeff_tensor[0, 1, :, :].flatten(), self.dim_size)
-            + xp.diag(diff_coeff_tensor[1, 0, :, :].flatten(), -self.dim_size)
+        diff_coeff_tensor = diff_coeff_tensor.astype(self.dtype)
+        # assemble diffusion tensor matrix
+        W = xsp.spdiags(
+            [
+                xp.hstack((diff_coeff_tensor[0, 0, :, :].flatten(), diff_coeff_tensor[1, 1, :, :].flatten())),
+                diff_coeff_tensor[0, 1, :, :].flatten(),
+                diff_coeff_tensor[1, 0, :, :].flatten(),
+            ],
+            diags=[0, self.dim_size, -self.dim_size],
+            m=2 * self.dim_size,
+            n=2 * self.dim_size,
+            format="csr",
         )
-
-        if is_numpy:
-            # make matrices sparse
-            D_sp = sp.csr_matrix(D, dtype=self.dtype)
-            W_sp = sp.csr_matrix(W, dtype=self.dtype)
-        elif is_cupy:
-            import cupyx.scipy.sparse as csp
-
-            # make matrices sparse
-            D_sp = csp.csr_matrix(D, dtype=self.dtype)
-            W_sp = csp.csr_matrix(W, dtype=self.dtype)
-        else:
-            raise Warning(
-                "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient. Assembling full matrices."
-            )
-        # assemble matrix-version of diffusion operator
-        L = D_sp.T @ W_sp @ D_sp
+        # assemble gradient matrix
+        L = D.T @ W @ D
         self._grad_matrix_based = pyca.LinOp.from_array(L)
 
     def asloss(self, data: pyct.NDArray = None) -> NotImplemented:
