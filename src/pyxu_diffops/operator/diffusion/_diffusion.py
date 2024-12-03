@@ -21,7 +21,7 @@ __all__ = [
 class _ExplicitLinOpSparseMatrix(pyca.LinOp):
     def __init__(self, dim_shape, mat):
         assert len(mat.shape) == 2, "Matrix `mat` must be a 2-dimensional array"
-        super().__init__(dim_shape=dim_shape, codim_shape=mat.shape[0])
+        super().__init__(dim_shape=dim_shape, codim_shape=dim_shape[1:])
         self.mat = mat
         self.num_pixels = np.prod(dim_shape[-2:])
 
@@ -32,7 +32,7 @@ class _ExplicitLinOpSparseMatrix(pyca.LinOp):
         return y
 
     def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
-        arr = arr.reshape(*arr.shape[:-1], self.codim_shape)
+        arr = arr.reshape(*arr.shape[:-1], self.codim_size)
         y = self.mat.T.dot(arr.T).T
         y = y.reshape(*y.shape[:-1], *self.dim_shape[1:])
         return y
@@ -484,6 +484,7 @@ class _Diffusion(pyca.DiffFunc):
         )
         # assemble gradient matrix
         L = D.T @ W @ D
+        L = xsp.csr_matrix(L)
         self._grad_matrix_based = _ExplicitLinOpSparseMatrix(dim_shape=self.dim_shape, mat=L)
 
     def asloss(self, data: pyct.NDArray = None) -> NotImplemented:
@@ -561,10 +562,7 @@ class _Diffusion(pyca.DiffFunc):
     def grad(self, arr: pyct.NDArray) -> pyct.NDArray:
         xp = pycu.get_array_module(arr)  # (batch,nchannels,nx,ny)
         if self.matrix_based_impl:
-            arr = arr.reshape(*arr.shape[:-2], self.num_pixels)
-            y = self._grad_matrix_based(arr)
-            y = y.reshape(*y.shape[:-1], *self.dim_shape[1:])
-            return y
+            return self._grad_matrix_based(arr)
         else:
             y = xp.zeros_like(arr)
             if self.diffusion_coefficient is not None:
