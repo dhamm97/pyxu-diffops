@@ -144,17 +144,17 @@ class _DiffusionCoefficient(pyca.Map):
 
     def freeze(self, arr: pyct.NDArray):
         if self.frozen:
-            warnings.warn("DiffusionCoefficient has already been frozen. Cannot overwrite previous frozen state.")
-        else:
-            self.frozen_coeff = self.apply(arr)
-            self.frozen = True
+            warnings.warn("DiffusionCoefficient had already been frozen. Overwriting previous frozen state.")
+            self.frozen = False
+        self.frozen_coeff = self.apply(arr)
+        self.frozen = True
 
     def set_frozen_coeff(self, frozen_coeff: pyct.OpT):
         if self.frozen:
-            warnings.warn("DiffusionCoefficient has already been frozen. Cannot overwrite previous frozen state.")
-        else:
-            self.frozen_coeff = frozen_coeff
-            self.frozen = True
+            warnings.warn("DiffusionCoefficient had already been frozen. Overwriting previous frozen state.")
+            self.frozen = False
+        self.frozen_coeff = frozen_coeff
+        self.frozen = True
 
     def apply(self, arr: pyct.NDArray) -> pyct.OpT:
         if self.frozen:
