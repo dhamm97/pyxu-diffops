@@ -870,6 +870,8 @@ class AnisEdgeEnhancingDiffusionOp(_Diffusion):
             gradient=gradient,
             diffusion_coefficient=edge_enh_diffusion_coeff,
             matrix_based_impl=matrix_based_impl,
+            gpu=gpu,
+            dtype=dtype,
         )
         # initialize lipschitz constants. should this be done instead inside _DiffusionOp.__init__ ??
         self.diff_lipschitz = gradient.lipschitz**2
@@ -1060,6 +1062,8 @@ class AnisCoherenceEnhancingDiffusionOp(_Diffusion):
             gradient=gradient,
             diffusion_coefficient=coh_enh_diffusion_coeff,
             matrix_based_impl=matrix_based_impl,
+            gpu=gpu,
+            dtype=dtype,
         )
         # initialize lipschitz constants. should this be done instead inside _DiffusionOp.__init__ ??
         self.diff_lipschitz = gradient.lipschitz**2
@@ -1188,6 +1192,8 @@ class AnisDiffusionOp(_Diffusion):
             gradient=gradient,
             diffusion_coefficient=anis_diffusion_coeff,
             matrix_based_impl=matrix_based_impl,
+            gpu=gpu,
+            dtype=dtype,
         )
         # initialize lipschitz constants. should this be done instead inside _DiffusionOp.__init__ ??
         self.diff_lipschitz = gradient.lipschitz**2

@@ -18,6 +18,26 @@ __all__ = [
 ]
 
 
+class _ExplicitLinOpSparseMatrix(pyca.LinOp):
+    def __init__(self, dim_shape, mat):
+        assert len(mat.shape) == 2, "Matrix `mat` must be a 2-dimensional array"
+        super().__init__(dim_shape=dim_shape, codim_shape=mat.shape[0])
+        self.mat = mat
+        self.num_pixels = np.prod(dim_shape[-2:])
+
+    def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
+        arr = arr.reshape(*arr.shape[:-2], self.num_pixels)
+        y = self.mat.dot(arr.T).T
+        y = y.reshape(*y.shape[:-1], self.codim_shape)
+        return y
+
+    def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
+        arr = arr.reshape(*arr.shape[:-1], self.codim_shape)
+        y = self.mat.T.dot(arr.T).T
+        y = y.reshape(*y.shape[:-1], *self.dim_shape[1:])
+        return y
+
+
 class _Diffusion(pyca.DiffFunc):
     r"""
     Abstract class for diffusion operators
@@ -149,6 +169,7 @@ class _Diffusion(pyca.DiffFunc):
         outer_trace_diffusivity: pyct.OpT = None,
         trace_diffusion_coefficient: pyct.OpT = None,
         matrix_based_impl: bool = False,
+        gpu: bool = False,
         dtype: typ.Optional[pyct.DType] = None,
     ):
         r"""
@@ -233,6 +254,7 @@ class _Diffusion(pyca.DiffFunc):
         self.gradient = gradient
         self.hessian = hessian
         self.matrix_based_impl = matrix_based_impl
+        self.gpu = gpu
         self.dtype = dtype if dtype is not None else np.float64
         if matrix_based_impl:
             self._assemble_matrix_based()
@@ -410,14 +432,22 @@ class _Diffusion(pyca.DiffFunc):
         N = pycd.NDArrayInfo
         is_numpy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.NUMPY
         is_cupy = N.from_obj(self.diffusion_coefficient.frozen_coeff) == N.CUPY
+        # if self.gpu and not is_cupy:
+        #     msg = "Converting `diffusion_coefficient` to cupy array (`gpu=True`)"
+        #     warnings.warn(msg)
+        #     self.diffusion_coefficient.frozen_coeff
         if is_numpy:
             xsp = sp
         elif is_cupy:
             import cupyx.scipy.sparse as xsp
         else:
-            raise TypeError(
-                "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient. Set 'matrix_based_imple' to 'False'"
+            msg = "\n".join(
+                [
+                    "Matrix-based sparse implementation only supports numpy or cupy diffusion coefficient.",
+                    "Set 'matrix_based_implementation' to 'False'",
+                ]
             )
+            raise TypeError(msg)
 
         Dx = xsp.diags(
             [-xp.ones(self.dim_shape[1]) / self.sampling[1], xp.ones(self.dim_shape[1] - 1) / self.sampling[1]],
@@ -454,7 +484,7 @@ class _Diffusion(pyca.DiffFunc):
         )
         # assemble gradient matrix
         L = D.T @ W @ D
-        self._grad_matrix_based = pyca.LinOp.from_array(L)
+        self._grad_matrix_based = _ExplicitLinOpSparseMatrix(dim_shape=self.dim_shape, mat=L)
 
     def asloss(self, data: pyct.NDArray = None) -> NotImplemented:
         """
