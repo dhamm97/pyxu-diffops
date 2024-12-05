@@ -21,14 +21,14 @@ __all__ = [
 class _ExplicitLinOpSparseMatrix(pyca.LinOp):
     def __init__(self, dim_shape, mat):
         assert len(mat.shape) == 2, "Matrix `mat` must be a 2-dimensional array"
-        super().__init__(dim_shape=dim_shape, codim_shape=dim_shape[1:])
+        super().__init__(dim_shape=dim_shape, codim_shape=dim_shape)
         self.mat = mat
         self.num_pixels = np.prod(dim_shape[-2:])
 
     def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
         arr = arr.reshape(*arr.shape[:-2], self.num_pixels)
         y = self.mat.dot(arr.T).T
-        y = y.reshape(*y.shape[:-1], *self.codim_shape)
+        y = y.reshape(*y.shape[:-1], *self.codim_shape[1:])
         return y
 
     def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
