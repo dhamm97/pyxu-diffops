@@ -28,7 +28,7 @@ class _ExplicitLinOpSparseMatrix(pyca.LinOp):
     def apply(self, arr: pyct.NDArray) -> pyct.NDArray:
         arr = arr.reshape(*arr.shape[:-2], self.num_pixels)
         y = self.mat.dot(arr.T).T
-        y = y.reshape(*y.shape[:-1], self.codim_shape)
+        y = y.reshape(*y.shape[:-1], *self.codim_shape)
         return y
 
     def adjoint(self, arr: pyct.NDArray) -> pyct.NDArray:
