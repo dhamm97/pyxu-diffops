@@ -15,25 +15,16 @@ This `Pyxu`_ plugin was generated with `Cookiecutter`_ using the `cookiecutter-p
 Installation
 ------------
 
-You can install ``pyxu-diffops`` via `pip`_:
+To install ``pyxu-diffops`` :
 
 .. code-block:: bash
 
-   pip install pyxu-diffops
+   git clone https://github.com/dhamm97/pyxu-diffops.git
+   pip install .
 
+Install by ``pip install .[dev]`` instead if interested in developing and/or contributing.
 
-To install latest development version :
-
-.. code-block:: bash
-
-   pip install git+https://github.com/dhamm97/pyxu-diffops.git
-
-
-Contributing
-------------
-
-Contributions are very welcome. Tests can be run with `tox`_, please ensure
-the coverage at least stays the same before you submit a pull request.
+Installation of ``pyxu-diffops`` will be made available via `pip`_ in the near future.
 
 License
 -------
