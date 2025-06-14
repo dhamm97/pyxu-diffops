@@ -1,21 +1,9 @@
 pyxu-diffops
 ============
 
-.. image:: https://img.shields.io/pypi/l/pyxu-diffops.svg?color=green
-   :target: https://github.com/dhamm97/pyxu-diffops/raw/main/LICENSE
-   :alt: License MIT
-.. image:: https://img.shields.io/pypi/v/pyxu-diffops.svg?color=green
-   :target: https://pypi.org/project/pyxu-diffops
-   :alt: PyPI
-.. image:: https://github.com/dhamm97/pyxu-diffops/workflows/tests/badge.svg
-   :target: https://github.com/dhamm97/pyxu-diffops/actions
-   :alt: tests
-.. image:: https://codecov.io/gh/dhamm97/pyxu-diffops/branch/main/graph/badge.svg
-   :target: https://codecov.io/gh/dhamm97/pyxu-diffops
-   :alt: codecov
-.. image:: https://img.shields.io/endpoint?url=https://pyxu-org.github.io/fair/shields/pyxu-diffops
-   :alt: Pyxu score
-   :target: https://pyxu-org.github.io/fair/score.html
+.. image:: https://zenodo.org/badge/884387426.svg
+  :target: https://doi.org/10.5281/zenodo.15490953
+  :alt: DOI
 
 Plugin to use diffusion operators for image reconstruction
 ----------------------------------------------------------
