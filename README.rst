@@ -37,6 +37,19 @@ Notes
 
 Unit testing and an improved example gallery are under development.
 
+Cite us
+-------
+
+::
+
+@software{pyxu-diffops,
+  author       = {Daniele Hamm},
+  title        = {https://github.com/dhamm97/pyxu-diffops},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.15490954},
+  url          = {https://doi.org/10.5281/zenodo.15490954}
+}
+
 Issues
 ------
 
