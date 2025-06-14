@@ -32,6 +32,11 @@ License
 Distributed under the terms of the `MIT`_ license,
 ``pyxu-diffops`` is free and open source software
 
+Notes
+-----
+
+Unit testing and an improved example gallery are under development.
+
 Issues
 ------
 
