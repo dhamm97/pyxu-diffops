@@ -26,14 +26,10 @@ Install by ``pip install .[dev]`` instead if interested in developing and/or con
 
 Installation of ``pyxu-diffops`` will be made available via `pip`_ in the near future.
 
-License
--------
-
-Distributed under the terms of the `MIT`_ license,
-``pyxu-diffops`` is free and open source software
-
 Notes
 -----
+
+Check out our documentation `documentation <https://dhamm97.github.io/pyxu-diffops/>`_ ! You can learn how to use ``pyxu-diffops`` by checking the ``API Reference`` section.
 
 Unit testing and an improved example gallery are under development.
 
@@ -49,6 +45,12 @@ Cite us
     doi          = {10.5281/zenodo.15490954},
     url          = {https://doi.org/10.5281/zenodo.15490954}
   }
+
+License
+-------
+
+Distributed under the terms of the `MIT`_ license,
+``pyxu-diffops`` is free and open source software
 
 Issues
 ------
