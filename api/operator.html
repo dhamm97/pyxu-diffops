@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>pyxu_diffops.operator — pyxu-diffops Documentation</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet"/>
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css?v=03e43079" rel="stylesheet" type="text/css"/>
+<link href="../_static/plot_directive.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-codeautolink.css?v=b2176991" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css?v=76b2166b" rel="stylesheet" type="text/css"/>
+<link href="../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../_static/sg_gallery.css?v=d2d258e8" rel="stylesheet" type="text/css"/>
+<link href="../_static/sg_gallery-binder.css?v=f4aeca0c" rel="stylesheet" type="text/css"/>
+<link href="../_static/sg_gallery-dataframe.css?v=2082cf3c" rel="stylesheet" type="text/css"/>
+<link href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
+<link href="../_static/css/custom.css?v=113f4227" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" rel="preload"/>
+<script src="../_static/documentation_options.js?v=3a322c97"></script>
+<script src="../_static/doctools.js?v=9a2dae69"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+<script src="../_static/copybutton.js?v=30646c52"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../_static/design-tabs.js?v=f930bc37"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'api/operator';</script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../examples/index.html" rel="next" title="Example Gallery"/>
+<link href="index.html" rel="prev" title="API Reference"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<input class="sidebar-toggle" id="__primary" name="__primary" type="checkbox"/>
+<label class="overlay overlay-primary" for="__primary"></label>
+<input class="sidebar-toggle" id="__secondary" name="__secondary" type="checkbox"/>
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+<span class="fa-solid fa-bars"></span>
+</label>
+<div class="navbar-header-items__start">
+<div class="navbar-item">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Logo image" class="logo__image only-light" src="../_static/logo.png"/>
+<script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+</a></div>
+</div>
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item"><nav class="navbar-nav">
+<p aria-label="Site Navigation" aria-level="1" class="sidebar-header-items__title" role="heading">
+    Site Navigation
+  </p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+                        API Reference
+                      </a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../examples/index.html">
+                        Example Gallery
+                      </a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../references.html">
+                        References
+                      </a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+</div>
+<div class="navbar-item">
+<strong> v1.0b1 </strong></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links navbar-nav">
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/dhamm97/pyxu-diffops" rel="noopener" target="_blank" title="GitHub"><span><i class="fa-brands fa-github"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/dhamm97/pyxu-diffops" rel="noopener" target="_blank" title="PyPI"><span><i class="fa-brands fa-python"></i></span>
+<label class="sr-only">PyPI</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="mailto: daniele.hamm@epfl.ch" rel="noopener" target="_blank" title="Contact"><span><i class=""></i></span>
+<label class="sr-only">Contact</label></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+</div>
+<label class="sidebar-toggle secondary-toggle" for="__secondary">
+<span class="fa-solid fa-outdent"></span>
+</label>
+</div>
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item"><nav class="navbar-nav">
+<p aria-label="Site Navigation" aria-level="1" class="sidebar-header-items__title" role="heading">
+    Site Navigation
+  </p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+                        API Reference
+                      </a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../examples/index.html">
+                        Example Gallery
+                      </a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../references.html">
+                        References
+                      </a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<strong> v1.0b1 </strong></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links navbar-nav">
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/dhamm97/pyxu-diffops" rel="noopener" target="_blank" title="GitHub"><span><i class="fa-brands fa-github"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/dhamm97/pyxu-diffops" rel="noopener" target="_blank" title="PyPI"><span><i class="fa-brands fa-python"></i></span>
+<label class="sr-only">PyPI</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-placement="bottom" data-bs-toggle="tooltip" href="mailto: daniele.hamm@epfl.ch" rel="noopener" target="_blank" title="Contact"><span><i class=""></i></span>
+<label class="sr-only">Contact</label></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item"><nav aria-label="Section Navigation" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Section Navigation</p>
+<div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pyxu_diffops.operator</a></li>
+</ul>
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item">
+<nav aria-label="Breadcrumbs">
+<ul aria-label="Breadcrumb" class="bd-breadcrumbs" role="navigation">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">API Reference</a></li>
+<li aria-current="page" class="breadcrumb-item active">pyxu_diffops.operator</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article" role="main">
+<section id="pyxu-diffops-operator">
+<h1>pyxu_diffops.operator<a class="headerlink" href="#pyxu-diffops-operator" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.MfiDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MfiDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_term</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clipping_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#MfiDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.MfiDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Minimum Fisher Information (MFI) diffusion operator, featuring an inhomogeneous isotropic diffusion tensor.
+Inspired from minimally informative prior principles, it is popular in the plasma physics tomography community.
+The diffusivity decreases for increasing local intensity values, to preserve bright features.</p>
+<p>The MFI diffusion tensor is defined, for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\big(\mathbf{D}(\mathbf{f})\big)_i = (g(\mathbf{f}))_i \;\mathbf{I} = \begin{pmatrix}(g(\mathbf{f}))_i &amp; 0\\ 0 &amp; (g(\mathbf{f}))_i\end{pmatrix},\end{split}\]</div>
+<p>where the diffusivity <span class="math notranslate nohighlight">\(g\)</span> is defined in two possible ways:</p>
+<ul>
+<li><p>in the <em>tame</em> case as</p>
+<div class="math notranslate nohighlight">
+\[(g(\mathbf{f}))_i = \frac{1}{1+\max\{\delta, f_i\}/\beta},\quad\delta\ll 1,\]</div>
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\quad\;\;\)</span> where <span class="math notranslate nohighlight">\(\beta\)</span> is a contrast parameter,</p>
+<ul>
+<li><p>in the <em>untame</em> case as</p>
+<div class="math notranslate nohighlight">
+\[(g(\mathbf{f}))_i = \frac{1}{\max\{\delta, f_i\}},\quad\delta\ll 1,\]</div>
+</li>
+</ul>
+<p>The gradient of the operator reads</p>
+<div class="math notranslate nohighlight">
+\[-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})-\sum_{i=0}^{N_{tot}-1}\frac{\vert(\boldsymbol{\nabla}\mathbf{f})_i\vert^2}{(g(\mathbf{f}))_i^2}\;,\]</div>
+<p>where the sum is an optional balloon force <code class="code docutils literal notranslate"><span class="pre">extra_term</span></code>, which can be included or not.</p>
+<p>We recommend using the <em>tame</em> version, since it is better behaved: the <em>untame</em> version requires very small
+steps to be stable. Furthermore, we recommend including the extra term, because in this case the
+potential <span class="math notranslate nohighlight">\(\phi\)</span> can be defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>extra_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the extra term arising from the differentiation of the MFI functional should be
+included. Defaults to <code class="code docutils literal notranslate"><span class="pre">True</span></code> (recommended). If set to <code class="code docutils literal notranslate"><span class="pre">False</span></code> (<em>linearized MFI</em>), the MFI diffusion operator
+does not admit a potential and the <code class="docutils literal notranslate"><span class="pre">apply()</span></code> method is not defined.</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Contrast parameter, determines the magnitude above which image gradients are preserved. Defaults to 1.</p></li>
+<li><p><strong>clipping_value</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Clipping value <span class="math notranslate nohighlight">\(\delta\)</span> in the expression of the MFI diffusivity. Defaults to 1e-5.</p></li>
+<li><p><strong>tame</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether tame or untame version should be used. Defaults to <code class="code docutils literal notranslate"><span class="pre">True</span></code> (tame, recommended).</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – MFI diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.PeronaMalikDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PeronaMalikDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pm_fct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exponential'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_gd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#PeronaMalikDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.PeronaMalikDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Perona-Malik diffusion operator, featuring an inhomogeneous isotropic diffusion tensor with Perona-Malik diffusivity. It can be used for edge-preserving smoothing.
+It reduces the diffusion intensity in locations characterised by large gradients, effectively achieving edge-preservation.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(\nabla\phi(\mathbf{f})=-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})\)</span>,
+where <span class="math notranslate nohighlight">\(\phi\)</span> is the potential.</p>
+<p>The Perona-Malik diffusion tensor is defined, for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\big(\mathbf{D}(\mathbf{f})\big)_i = (g(\mathbf{f}))_i \;\mathbf{I} = \begin{pmatrix}(g(\mathbf{f}))_i &amp; 0\\ 0 &amp; (g(\mathbf{f}))_i\end{pmatrix},\end{split}\]</div>
+<p>where the diffusivity with contrast parameter <span class="math notranslate nohighlight">\(\beta\)</span> is defined as:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((g(\mathbf{f}))_i = \exp(-\vert (\nabla_\sigma \mathbf{f})_i \vert ^2 / \beta^2)\)</span> in the exponential case,</p></li>
+<li><p><span class="math notranslate nohighlight">\((g(\mathbf{f}))_i = 1/\big( 1+\vert (\nabla_\sigma \mathbf{f})_i \vert ^2 / \beta^2\big)\)</span> in the rational case.</p></li>
+</ul>
+<p>Gaussian derivatives with width <span class="math notranslate nohighlight">\(\sigma\)</span> are used for the gradient as customary with the ill-posed Perona-Malik diffusion process.</p>
+<p>In both cases, the corresponding divergence-based diffusion term admits a potential
+(see <a class="reference internal" href="../references.html#tschumperle" id="id1"><span>[Tschumperle]</span></a> for the exponential case): the <code class="docutils literal notranslate"><span class="pre">apply()</span></code> method is well-defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Contrast parameter, determines the magnitude above which image gradients are preserved. Defaults to 1.</p></li>
+<li><p><strong>pm_fct</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Perona-Malik diffusivity function. Must be either ‘exponential’ or ‘rational’.</p></li>
+<li><p><strong>sigma_gd</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Standard deviation for kernel of Gaussian derivatives used for gradient computation. Defaults to 1.</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Perona-Malik diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Import RGB image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skim</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#float" title="float"><span class="nb">float</span></a><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (300, 451, 3)</span>
+
+<span class="c1"># Move color-stacking axis to front (needed for pyxu stacking convention)</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 300, 451)</span>
+
+<span class="c1"># Instantiate diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.PeronaMalikDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.PeronaMalikDiffusion"><span class="n">pm_diffop</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.PeronaMalikDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.PeronaMalikDiffusion"><span class="n">pyxop</span><span class="o">.</span><span class="n">PeronaMalikDiffusion</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Define PGD solver, with stopping criterion and starting point x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Perform 50 gradient flow iterations starting from x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.PeronaMalikDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.PeronaMalikDiffusion"><span class="n">pm_diffop</span></a><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PGD</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span>
+               <span class="n">tau</span><span class="o">=</span><span class="mi">2</span> <span class="o">/</span> <span class="n">pm_diffop</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">pm_smoothed_image</span> <span class="o">=</span> <span class="n">PGD</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">pm_smoothed_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">pm_smoothed_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">pm_smoothed_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"100 iterations Perona Malik diffusion"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/9c8347663ec88378aaae5057c1ae3264/operator-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/8b695d494c85f1c4793c328b97cbc021/operator-1.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/ca2090d31fc0a86e6382087c1b5955b0/operator-1.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/ee7aa894b3da122692fdf69beafcbe37/operator-1.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-1.png" class="plot-directive" src="../_images/operator-1.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.TikhonovDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TikhonovDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#TikhonovDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.TikhonovDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Tikhonov diffusion operator, featuring a homogeneous isotropic diffusion tensor with constant diffusivity. It
+achieves Gaussian smoothing, isotropically smoothing in all directions. The diffusion intensity is identical at all
+locations. Smoothing with this diffusion operator blurs the original image.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(\nabla\phi(\mathbf{f})=-\mathrm{div}(\boldsymbol{\nabla}\mathbf{f})=-\boldsymbol{\Delta}\mathbf{f}\)</span>;
+it derives from the potential <span class="math notranslate nohighlight">\(\phi=\Vert\boldsymbol{\nabla}\mathbf{f}\Vert_2^2\)</span>.</p>
+<p>The Tikohnov diffusion tensor is defined, for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\big(\mathbf{D}(\mathbf{f})\big)_i = \mathbf{I} = \begin{pmatrix}1 &amp; 0\\ 0 &amp; 1\end{pmatrix}.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Tikhonov diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Import RGB image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skim</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#float" title="float"><span class="nb">float</span></a><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (300, 451, 3)</span>
+
+<span class="c1"># Move color-stacking axis to front (needed for pyxu stacking convention)</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 300, 451)</span>
+
+<span class="c1"># Instantiate diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TikhonovDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TikhonovDiffusion"><span class="n">tikh_diffop</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TikhonovDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TikhonovDiffusion"><span class="n">pyxop</span><span class="o">.</span><span class="n">TikhonovDiffusion</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">))</span>
+
+<span class="c1"># Define PGD solver, with stopping criterion and starting point x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Perform 50 gradient flow iterations starting from x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TikhonovDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TikhonovDiffusion"><span class="n">tikh_diffop</span></a><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PGD</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span>
+               <span class="n">tau</span><span class="o">=</span><span class="mi">2</span> <span class="o">/</span> <span class="n">tikh_diffop</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">tikh_smoothed_image</span> <span class="o">=</span> <span class="n">PGD</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting.</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">tikh_smoothed_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">tikh_smoothed_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tikh_smoothed_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"100 iterations Tikhonov smoothing"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/9029f349dcba6220309b295a9140982b/operator-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/b9ab671fb0a7f18372db2008f8f175b3/operator-2.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/6456824f0a6ba3b0c63ce20c17d96e7d/operator-2.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/1b73e81f624aaa2edc92c239025b33b2/operator-2.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-2.png" class="plot-directive" src="../_images/operator-2.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.TotalVariationDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TotalVariationDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#TotalVariationDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.TotalVariationDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Total variation (TV) diffusion operator, featuring an inhomogeneous isotropic diffusion tensor. It can be used for edge-enhancing smoothing.
+It reduces the diffusion intensity in locations characterised by large gradients, effectively achieving edge-preservation. The
+diffusion operator formulation of total variation regularization stems from the Euler-Lagrange equations associated to the
+problem of minimizing the TV regularization functional.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(\nabla\phi(\mathbf{f})=-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})\)</span>,
+deriving from the total variation potential <span class="math notranslate nohighlight">\(\phi\)</span>.
+In the TV classical (<em>untame</em>) formulation, it holds
+<span class="math notranslate nohighlight">\(\phi=\Vert \boldsymbol{\nabla}\mathbf{f}\Vert_{2,1}=\sum_{i=0}^{N_{tot}-1}\vert(\boldsymbol{\nabla}\mathbf{f})_i\vert\)</span>.
+A similar definition holds for its <em>tame</em> version (recommended).</p>
+<p>The TV diffusion tensor is defined, for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\big(\mathbf{D}(\mathbf{f})\big)_i = (g(\mathbf{f}))_i \;\mathbf{I} = \begin{pmatrix}(g(\mathbf{f}))_i &amp; 0\\ 0 &amp; (g(\mathbf{f}))_i\end{pmatrix}.\end{split}\]</div>
+<p>The diffusivity can be defined in two possible ways:</p>
+<ul class="simple">
+<li><p>in the <em>tame</em> case as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(g(\mathbf{f}))_i = \frac{\beta} { \sqrt{\beta^2+ \vert (\boldsymbol{\nabla} \mathbf{f})_i \vert ^2}}, \quad \forall i\]</div>
+<ul class="simple">
+<li><p>in the <em>untame</em> case as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(g(\mathbf{f}))_i = \frac{1} { \vert (\boldsymbol{\nabla} \mathbf{f})_i \vert}, \quad \forall i.\]</div>
+<p>The <em>tame</em> formulation amounts to an approximation of the TV functional very similar to the Huber loss approach. The
+parameter <span class="math notranslate nohighlight">\(\beta\)</span> controls the quality of the smooth approximation of the <span class="math notranslate nohighlight">\(L^2\)</span> norm
+<span class="math notranslate nohighlight">\(\vert (\boldsymbol{\nabla} \mathbf{f})_i \vert\)</span> involved in the TV
+approach. Lower values correspond to better approximations but typically lead to larger computational cost.</p>
+<p>We recommended using the <em>tame</em> version; the <em>untame</em> one is unstable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Contrast parameter, determines the magnitude above which image gradients are preserved. Defaults to 1.</p></li>
+<li><p><strong>tame</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether tame or untame version should be used. Defaults to <code class="code docutils literal notranslate"><span class="pre">True</span></code> (tame, recommended).</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Total variation diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Import RGB image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skim</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#float" title="float"><span class="nb">float</span></a><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (300, 451, 3)</span>
+
+<span class="c1"># Move color-stacking axis to front (needed for pyxu stacking convention)</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 300, 451)</span>
+
+<span class="c1"># Instantiate diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TotalVariationDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TotalVariationDiffusion"><span class="n">tv_diffop</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TotalVariationDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TotalVariationDiffusion"><span class="n">pyxop</span><span class="o">.</span><span class="n">TotalVariationDiffusion</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Define PGD solver, with stopping criterion and starting point x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Perform 50 gradient flow iterations starting from x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.TotalVariationDiffusion" title="pyxu_diffops.operator.diffusion.diffusion.TotalVariationDiffusion"><span class="n">tv_diffop</span></a><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PGD</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span>
+               <span class="n">tau</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="n">tv_diffop</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">tv_smoothed_image</span> <span class="o">=</span> <span class="n">PGD</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting.</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">tv_smoothed_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">tv_smoothed_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tv_smoothed_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"100 iterations Total Variation smoothing"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/557f177f4b474935fc904081afacebf3/operator-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/646fb4a9e23f9bb5b9c5e194089f86be/operator-3.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/35172a34ada1c1ffc5b38c8e6ac4dd69/operator-3.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/a23758df6c83090f65eab693553b58e8/operator-3.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-3.png" class="plot-directive" src="../_images/operator-3.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.CurvaturePreservingDiffusionOp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CurvaturePreservingDiffusionOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curvature_preservation_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#CurvaturePreservingDiffusionOp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.CurvaturePreservingDiffusionOp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Curvature preserving diffusion operator <a class="reference internal" href="../references.html#tschumperle" id="id2"><span>[Tschumperle]</span></a>. This trace-based operator promotes curvature
+preservation along a given vector field <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, defined by a <span class="math notranslate nohighlight">\(2\)</span>-dimensional
+vector <span class="math notranslate nohighlight">\(\mathbf{w}_i\in\mathbb{R}^2\)</span> for each pixel <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The gradient of the operator reads</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial\mathbf{f}}{\partial t} = -\mathrm{trace}\big(\mathbf{T}(\mathbf{w})\mathbf{H}(\mathbf{f})\big) - (\nabla\mathbf{f})^T \mathbf{J}_{\mathbf{w}}\mathbf{w},\]</div>
+<p>where the trace diffusion tensor <span class="math notranslate nohighlight">\(\mathbf{T}(\mathbf{f})\)</span> is defined, for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as</p>
+<div class="math notranslate nohighlight">
+\[\big(\mathbf{T}(\mathbf{f})\big)_i=\mathbf{w}_i\mathbf{w}_i^T.\]</div>
+<p>The curvature preserving diffusion operator does not admit a potential.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>curvature_preservation_field</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.NDArray" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code></a>) – Vector field of shape <span class="math notranslate nohighlight">\((2, N_0, N_1)\)</span> along which curvature should be preserved.</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Curvature preserving diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.operator.linop.diff</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pydiff</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Define random image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.rand.html#numpy.random.rand" title="numpy.random.rand"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">)</span>
+
+<span class="c1"># Define vector field, diffusion process will preserve curvature along it</span>
+<span class="n">image_center</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+<span class="n">curvature_preservation_field</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.prod.html#numpy.prod" title="numpy.prod"><span class="n">np</span><span class="o">.</span><span class="n">prod</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])))</span>
+<span class="n">curv_pres_1</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">curv_pres_2</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#range" title="range"><span class="nb">range</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#range" title="range"><span class="nb">range</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="n">theta</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.arctan2.html#numpy.arctan2" title="numpy.arctan2"><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span></a><span class="p">(</span><span class="o">-</span><span class="n">i</span> <span class="o">+</span> <span class="n">image_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span> <span class="o">-</span> <span class="n">image_center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">curv_pres_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.cos.html#numpy.cos" title="numpy.cos"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">curv_pres_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.sin.html#numpy.sin" title="numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">curvature_preservation_field</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">curv_pres_1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">curvature_preservation_field</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">curv_pres_2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">curvature_preservation_field</span> <span class="o">=</span> <span class="n">curvature_preservation_field</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="c1"># Define curvature-preserving diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.CurvaturePreservingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.CurvaturePreservingDiffusionOp"><span class="n">CurvPresDiffusionOp</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.CurvaturePreservingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.CurvaturePreservingDiffusionOp"><span class="n">pyxop</span><span class="o">.</span><span class="n">CurvaturePreservingDiffusionOp</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">),</span>
+                                                            <span class="n">curvature_preservation_field</span><span class="o">=</span><span class="n">curvature_preservation_field</span><span class="p">)</span>
+
+<span class="c1"># Perform 500 gradient flow iterations</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD_curve</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.CurvaturePreservingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.CurvaturePreservingDiffusionOp"><span class="n">CurvPresDiffusionOp</span></a><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">PGD_curve</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">tau</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">CurvPresDiffusionOp</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">curv_smooth_image</span> <span class="o">=</span> <span class="n">PGD_curve</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting.</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">curv_smooth_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">curv_smooth_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Rescale for better constrast</span>
+<span class="n">curv_smooth_image</span> <span class="o">-=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.min.html#numpy.min" title="numpy.min"><span class="n">np</span><span class="o">.</span><span class="n">min</span></a><span class="p">(</span><span class="n">curv_smooth_image</span><span class="p">)</span>
+<span class="n">curv_smooth_image</span> <span class="o">/=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.max.html#numpy.max" title="numpy.max"><span class="n">np</span><span class="o">.</span><span class="n">max</span></a><span class="p">(</span><span class="n">curv_smooth_image</span><span class="p">)</span>
+<span class="n">curv_smooth_image</span> <span class="o">*=</span> <span class="mi">255</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">curv_pres_2</span><span class="p">[::</span><span class="mi">40</span><span class="p">,</span> <span class="p">::</span><span class="mi">60</span><span class="p">],</span> <span class="n">curv_pres_1</span><span class="p">[::</span><span class="mi">40</span><span class="p">,</span> <span class="p">::</span><span class="mi">60</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Vector field"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">curv_smooth_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"200 iterations Curvature Preserving"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/c6b377da5d37f9a1a7bd869cb238734f/operator-4.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/925b8dbb426b10ee82b758364d2d7578/operator-4.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/999575d88656c663c2ee218df6b1177d/operator-4.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/f90f77fe9a3ca7cb2d6de92146a4d115/operator-4.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-4.png" class="plot-directive" src="../_images/operator-4.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AnisEdgeEnhancingDiffusionOp</span></span><span class="sig-paren">(</span>
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sigma_gd_st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">smooth_sigma_st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">freezing_arr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">matrix_based_impl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#AnisEdgeEnhancingDiffusionOp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Anisotropic edge-enhancing diffusion operator, featuring an inhomogeneous anisotropic diffusion tensor
+defined as in <a class="reference internal" href="../references.html#weickert" id="id3"><span>[Weickert]</span></a>. The diffusion tensor is defined as a function of the
+<a class="reference external" href="https://pyxu-org.github.io/api/operator/linop.html#pyxu.operator.StructureTensor" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureTensor</span></code></a>,
+which is a tensor describing the properties of the image in the neighbourhood of each pixel.
+This diffusion operator allows edge enhancement by reducing the flux in the direction of the
+eigenvector of the structure tensor with largest eigenvalue. Essentially, smoothing across
+the detected edges is inhibited in a more sophisticated way compared to isotropic approaches,
+by considering not only the local gradient but its behaviour in a neighbourhood of the pixel.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{v}_0^i,\mathbf{v}_1^i\)</span> be the eigenvectors of the <span class="math notranslate nohighlight">\(i\)</span>-th pixel structure tensor
+<span class="math notranslate nohighlight">\(S_i\)</span>, with eigenvalues <span class="math notranslate nohighlight">\(e_0^i, e_1^i\)</span> sorted in decreasing order. The diffusion tensor is defined,
+for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as the symmetric positive definite tensor:</p>
+<div class="math notranslate nohighlight">
+\[\big(\mathbf{D}(\mathbf{f})\big)_i = \lambda_0^i\mathbf{v}_0^i(\mathbf{v}_0^i)^T+\lambda_1^i\mathbf{v}_1^i(\mathbf{v}_1^i)^T,\]</div>
+<p>where the smoothing intensities along the two eigendirections are defined, to achieve edge-enhancing, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda_0^i &amp;= g(e_0^i) :=
+\begin{cases}
+    1 &amp; \text{if } e_0^i = 0 \\
+    1 - \exp\big(\frac{-C}{(e_0^i/\beta)^m}\big) &amp; \text{if } e_0^i &gt;0,
+\end{cases}\\
+ \lambda_1^i &amp;= 1,\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a contrast parameter, <span class="math notranslate nohighlight">\(m\)</span> controls the decay rate of <span class="math notranslate nohighlight">\(\lambda_0^i\)</span> as a function
+of <span class="math notranslate nohighlight">\(e_0^i\)</span>, and <span class="math notranslate nohighlight">\(C\in\mathbb{R}\)</span> is a normalization constant (see <a class="reference internal" href="../references.html#weickert" id="id4"><span>[Weickert]</span></a>).</p>
+<p>Since <span class="math notranslate nohighlight">\(\lambda_1^i \geq \lambda_0^i\)</span>, the smoothing intensity is stronger in the direction of the second
+eigenvector of <span class="math notranslate nohighlight">\(\mathbf{S}_i\)</span>, and therefore perpendicular to the (locally averaged) gradient.
+Moreover, <span class="math notranslate nohighlight">\(\lambda_0^i\)</span> is a decreasing function of <span class="math notranslate nohighlight">\(e_0^i\)</span>, which indicates that when the gradient
+magnitude is high (sharp edges), smoothing in the direction of the gradient is inhibited, i.e., edges are preserved.</p>
+<p>In general, the diffusion operator does not admit a potential. However, if the diffusion tensor is evaluated
+at some image <span class="math notranslate nohighlight">\(\tilde{\mathbf{f}}\)</span> and kept fixed to <span class="math notranslate nohighlight">\(\mathbf{D}(\tilde{\mathbf{f}})\)</span>, the operator
+derives from the potential <span class="math notranslate nohighlight">\(\Vert\sqrt{\mathbf{D}(\tilde{\mathbf{f}})}\boldsymbol{\nabla}\mathbf{f}\Vert_2^2\)</span>.
+By doing so, the smoothing directions and intensities are fixed according to the features of an image of interest.
+This can be achieved passing a <em>freezing array</em> at initialization. In such cases, a <em>matrix-based implementation</em>
+is recommended for efficiency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Contrast parameter, determines the gradient magnitude for edge enhancement. Defaults to 1.</p></li>
+<li><p><strong>m</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Decay parameter, determines how quickly the smoothing effect changes as a function of <span class="math notranslate nohighlight">\(e_0^i/\beta\)</span>. Defaults to 4.</p></li>
+<li><p><strong>sigma_gd_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Gaussian width of the gaussian derivative involved in the structure tensor computation. Defaults to 2.</p></li>
+<li><p><strong>smooth_sigma_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Width of the Gaussian filter smoothing the structure tensor (local averaging). Defaults to 0 (recommended).</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+<li><p><strong>freezing_arr</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.NDArray" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code></a>) – Array at which the diffusion tensor is evaluated and then frozen.</p></li>
+<li><p><strong>matrix_based_impl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether to use matrix based implementation or not. Defaults to False. Recommended to set <code class="code docutils literal notranslate"><span class="pre">True</span></code> if
+a <code class="docutils literal notranslate"><span class="pre">freezing_arr</span></code> is passed.</p></li>
+<li><p><strong>gpu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>dtype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><em>type</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_SupportsDType</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><em>Sequence</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_DTypeDict</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Anisotropic edge-enhancing diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Import RGB image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skim</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#float" title="float"><span class="nb">float</span></a><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (300, 451, 3)</span>
+
+<span class="c1"># Move color-stacking axis to front (needed for pyxu stacking convention)</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 300, 451)</span>
+
+<span class="c1"># Instantiate diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisEdgeEnhancingDiffusionOp"><span class="n">edge_enh_diffop</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisEdgeEnhancingDiffusionOp"><span class="n">pyxop</span><span class="o">.</span><span class="n">AnisEdgeEnhancingDiffusionOp</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Define PGD solver, with stopping criterion and starting point x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Perform 50 gradient flow iterations starting from x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisEdgeEnhancingDiffusionOp"><span class="n">edge_enh_diffop</span></a><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PGD</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span>
+               <span class="n">tau</span><span class="o">=</span><span class="mi">2</span> <span class="o">/</span> <span class="n">edge_enh_diffop</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">edge_enh_image</span> <span class="o">=</span> <span class="n">PGD</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting.</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">edge_enh_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">edge_enh_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edge_enh_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"100 iterations Anis. Edge Enhancing"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/c722cabc6093f717e47975d57ffbc907/operator-5.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/36fe774d4b9531a9b7471cccf5df7552/operator-5.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/d1d43d473b0f4368b7c6e91e21b490e0/operator-5.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/758c43883775bf96c999d8249824235e/operator-5.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-5.png" class="plot-directive" src="../_images/operator-5.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AnisCoherenceEnhancingDiffusionOp</span></span><span class="sig-paren">(</span>
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sigma_gd_st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">smooth_sigma_st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">diff_method_struct_tens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gd'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">freezing_arr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">matrix_based_impl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#AnisCoherenceEnhancingDiffusionOp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Anisotropic coherence-enhancing diffusion operator, featuring an inhomogeneous anisotropic diffusion tensor
+defined as in <a class="reference internal" href="../references.html#weickert" id="id5"><span>[Weickert]</span></a>. The diffusion tensor is defined as a function of the
+<a class="reference external" href="https://pyxu-org.github.io/api/operator/linop.html#pyxu.operator.StructureTensor" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureTensor</span></code></a>,
+which is a tensor describing the properties of the image in the neighbourhood of each pixel.
+This diffusion operator allows coherence enhancement by increasing the flux in the direction of the
+eigenvector of the structure tensor with smallest eigenvalue, with an intensity which depends on
+the image coherence, which is measured as <span class="math notranslate nohighlight">\((e_0-e_1)^2\)</span>. Stronger coherence leads to stronger smoothing.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{v}_0^i,\mathbf{v}_1^i\)</span> be the eigenvectors of the <span class="math notranslate nohighlight">\(i\)</span>-th pixel structure tensor
+<span class="math notranslate nohighlight">\(S_i\)</span>, with eigenvalues <span class="math notranslate nohighlight">\(e_0^i, e_1^i\)</span> sorted in decreasing order. The diffusion tensor is defined,
+for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as the symmetric positive definite tensor:</p>
+<div class="math notranslate nohighlight">
+\[\big(\mathbf{D}(\mathbf{f})\big)_i = \lambda_0^i\mathbf{v}_0^i(\mathbf{v}_0^i)^T+\lambda_1^i\mathbf{v}_1^i(\mathbf{v}_1^i)^T,\]</div>
+<p>where the smoothing intensities along the two eigendirections are defined, to achieve coherence-enhancing, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda_0^i &amp;= \alpha,\\
+\lambda_1^i &amp;=  h(e_0^i, e_1^i) :=
+\begin{cases}
+      \alpha &amp; \text{if } e_0^i=e_1^i \\
+       \alpha + (1-\alpha) \exp \big(\frac{-C}{(e_0^i-e_1^i)^{2m}}\big) &amp; \text{otherwise},
+\end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> controls the smoothing intensity along the first eigendirection, <span class="math notranslate nohighlight">\(m\)</span> controls
+the decay rate of <span class="math notranslate nohighlight">\(\lambda_0^i\)</span> as a function of <span class="math notranslate nohighlight">\((e_0^i-e_1^i)\)</span>, and <span class="math notranslate nohighlight">\(C\in\mathbb{R}\)</span> is a constant.</p>
+<p>For regions with low coherence, smoothing is performed uniformly along all
+directions with intensity <span class="math notranslate nohighlight">\(\lambda_1^i \approx \lambda_0^i = \alpha\)</span>. For regions with high coherence, we have
+<span class="math notranslate nohighlight">\(\lambda_1^i \approx 1 &gt; \lambda_0^i = \alpha\)</span>, hence the smoothing intensity is higher in the direction
+orthogonal to the (locally averaged) gradient.</p>
+<p>In general, the diffusion operator does not admit a potential. However, if the diffusion tensor is evaluated
+at some image <span class="math notranslate nohighlight">\(\tilde{\mathbf{f}}\)</span> and kept fixed to <span class="math notranslate nohighlight">\(\mathbf{D}(\tilde{\mathbf{f}})\)</span>, the operator
+derives from the potential <span class="math notranslate nohighlight">\(\Vert\sqrt{\mathbf{D}(\tilde{\mathbf{f}})}\boldsymbol{\nabla}\mathbf{f}\Vert_2^2\)</span>.
+By doing so, the smoothing directions and intensities are fixed according to the features of an image of interest.
+This can be achieved passing a <em>freezing array</em> at initialization. In such cases, a <em>matrix-based implementation</em>
+is recommended for efficiency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Anisotropic parameter, determining intensity of smoothing inhibition along the (locally averaged) image gradient.
+Defaults to 1e-1.</p></li>
+<li><p><strong>m</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Decay parameter, determines how quickly the smoothing effect changes as a function of <span class="math notranslate nohighlight">\(e_0^i/\beta\)</span>.
+Defaults to 1.</p></li>
+<li><p><strong>sigma_gd_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Gaussian width of the gaussian derivative involved in the structure tensor computation
+(if <code class="code docutils literal notranslate"><span class="pre">diff_method_struct_tens="gd"</span></code>). Defaults to 2.</p></li>
+<li><p><strong>smooth_sigma_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Width of the Gaussian filter smoothing the structure tensor (local averaging). Defaults to 4.</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+<li><p><strong>diff_method_struct_tens</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Differentiation method for structure tensor computation. Must be either ‘gd’ or ‘fd’.
+Defaults to ‘gd’.</p></li>
+<li><p><strong>freezing_arr</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.NDArray" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code></a>) – Array at which the diffusion tensor is evaluated and then frozen.</p></li>
+<li><p><strong>matrix_based_impl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether to use matrix based implementation or not. Defaults to False. Recommended to set <code class="code docutils literal notranslate"><span class="pre">True</span></code> if
+a <code class="docutils literal notranslate"><span class="pre">freezing_arr</span></code> is passed.</p></li>
+<li><p><strong>gpu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>dtype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><em>type</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_SupportsDType</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><em>Sequence</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_DTypeDict</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Anisotropic coherence-enhancing diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="numpy"><span class="nn">numpy</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><span class="nn">matplotlib.pyplot</span></a><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.abc.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pysolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu.opt.stop</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pystop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyxu_diffops.operator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyxop</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skim</span>
+
+<span class="c1"># Import RGB image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skim</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#float" title="float"><span class="nb">float</span></a><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (300, 451, 3)</span>
+
+<span class="c1"># Move color-stacking axis to front (needed for pyxu stacking convention)</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 300, 451)</span>
+
+<span class="c1"># Instantiate diffusion operator</span>
+<a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisCoherenceEnhancingDiffusionOp"><span class="n">coh_enh_diffop</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisCoherenceEnhancingDiffusionOp"><span class="n">pyxop</span><span class="o">.</span><span class="n">AnisCoherenceEnhancingDiffusionOp</span></a><span class="p">(</span><span class="n">dim_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">451</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="c1"># Define PGD solver, with stopping criterion and starting point x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">pystop</span><span class="o">.</span><span class="n">MaxIter</span></a><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Perform 50 gradient flow iterations starting from x0</span>
+<a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">PGD</span></a> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.solver.html#pyxu.opt.solver.PGD" title="pyxu.opt.solver.pgd.PGD"><span class="n">pysol</span><span class="o">.</span><span class="n">PGD</span></a><span class="p">(</span><span class="n">f</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="../api/operator.html#pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp" title="pyxu_diffops.operator.diffusion.diffusion.AnisCoherenceEnhancingDiffusionOp"><span class="n">coh_enh_diffop</span></a><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PGD</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#dict" title="dict"><span class="nb">dict</span></a><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">pysolver</span><span class="o">.</span><span class="n">SolverMode</span><span class="o">.</span><span class="n">BLOCK</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">stop_crit</span><span class="o">=</span><a class="sphinx-codeautolink-a" href="https://pyxu-org.github.io/api/opt.stop.html#pyxu.opt.stop.MaxIter" title="pyxu.opt.stop.MaxIter"><span class="n">stop_crit</span></a><span class="p">,</span>
+               <span class="n">tau</span><span class="o">=</span><span class="mi">2</span> <span class="o">/</span> <span class="n">coh_enh_diffop</span><span class="o">.</span><span class="n">diff_lipschitz</span><span class="p">))</span>
+<span class="n">coh_enh_image</span> <span class="o">=</span> <span class="n">PGD</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+
+<span class="c1"># Reshape images for plotting.</span>
+<span class="n">image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">coh_enh_image</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span></a><span class="p">(</span><span class="n">coh_enh_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a class="sphinx-codeautolink-a" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Image"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coh_enh_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#int" title="int"><span class="nb">int</span></a><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"100 iterations Anis. Coherence Enhancing"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../_downloads/8b75e17542eb060a859009378ccf739e/operator-6.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/51314ba6ee1ae39115d8e0d37bb6ae91/operator-6.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/3a7603daabb4101f49f7a9dd513ab803/operator-6.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/4617a7e816843b4107fe1d29530b7702/operator-6.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/operator-6.png" class="plot-directive" src="../_images/operator-6.png"/>
+</figure>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyxu_diffops.operator.AnisDiffusionOp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AnisDiffusionOp</span></span><span class="sig-paren">(</span>
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim_shape</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sigma_gd_st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">diff_method_struct_tens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fd'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">freezing_arr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">matrix_based_impl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyxu_diffops/operator/diffusion/diffusion.html#AnisDiffusionOp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyxu_diffops.operator.AnisDiffusionOp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Diffusion</span></code></p>
+<p>Anisotropic diffusion operator, featuring an inhomogeneous anisotropic diffusion tensor.
+The diffusion tensor is defined as a function of the
+<a class="reference external" href="https://pyxu-org.github.io/api/operator/linop.html#pyxu.operator.StructureTensor" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureTensor</span></code></a>,
+which is a tensor describing the properties of the image in the neighbourhood of each pixel.
+This diffusion operator allows anisotropic smoothing by reducing the flux in the direction of the
+eigenvector of the structure tensor with largest eigenvalue. Essentially, the (locally averaged)
+gradient is preserved.</p>
+<p>The gradient of the operator reads <span class="math notranslate nohighlight">\(-\mathrm{div}(\mathbf{D}(\mathbf{f})\boldsymbol{\nabla}\mathbf{f})\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{v}_0^i,\mathbf{v}_1^i\)</span> be the eigenvectors of the <span class="math notranslate nohighlight">\(i\)</span>-th pixel structure tensor
+<span class="math notranslate nohighlight">\(S_i\)</span>, with eigenvalues <span class="math notranslate nohighlight">\(e_0^i, e_1^i\)</span> sorted in decreasing order. The diffusion tensor is defined,
+for the <span class="math notranslate nohighlight">\(i\)</span>-th pixel, as the symmetric positive definite tensor:</p>
+<div class="math notranslate nohighlight">
+\[\big(\mathbf{D}(\mathbf{f})\big)_i = \lambda_0^i\mathbf{v}_0^i(\mathbf{v}_0^i)^T+\lambda_1^i\mathbf{v}_1^i(\mathbf{v}_1^i)^T,\]</div>
+<p>where the smoothing intensities along the two eigendirections are defined, to achieve anisotropic smoothing, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda_0^i &amp;= \alpha,\\
+\lambda_1^i &amp;=  1,\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> controls the smoothing intensity along the first eigendirection.</p>
+<p>In general, the diffusion operator does not admit a potential. However, if the diffusion tensor is evaluated
+at some image <span class="math notranslate nohighlight">\(\tilde{\mathbf{f}}\)</span> and kept fixed to <span class="math notranslate nohighlight">\(\mathbf{D}(\tilde{\mathbf{f}})\)</span>, the operator
+derives from the potential <span class="math notranslate nohighlight">\(\Vert\sqrt{\mathbf{D}(\tilde{\mathbf{f}})}\boldsymbol{\nabla}\mathbf{f}\Vert_2^2\)</span>.
+By doing so, the smoothing directions and intensities are fixed according to the features of an image of interest.
+This can be achieved passing a <em>freezing array</em> at initialization. In such cases, a <em>matrix-based implementation</em>
+is recommended for efficiency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NDArrayShape</span></code>) – Shape of the input array.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Anisotropic parameter, determining intensity of smoothing inhibition along the (locally averaged) image gradient.
+Defaults to 1e-1.</p></li>
+<li><p><strong>sigma_gd_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Gaussian width of the gaussian derivative involved in the structure tensor computation
+(if <code class="code docutils literal notranslate"><span class="pre">diff_method_struct_tens="gd"</span></code>). Defaults to 1.</p></li>
+<li><p><strong>smooth_sigma_st</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>) – Width of the Gaussian filter smoothing the structure tensor (local averaging). Defaults to 1.</p></li>
+<li><p><strong>sampling</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.Real" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list[Real]</span></code>) – Sampling step (i.e. distance between two consecutive elements of an array).
+Defaults to 1.</p></li>
+<li><p><strong>diff_method_struct_tens</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Differentiation method for structure tensor computation. Must be either ‘gd’ or ‘fd’.
+Defaults ot ‘fd’.</p></li>
+<li><p><strong>freezing_arr</strong> (<a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.NDArray" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NDArray</span></code></a>) – Array at which the diffusion tensor is evaluated and then frozen.</p></li>
+<li><p><strong>matrix_based_impl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether to use matrix based implementation or not. Defaults to False. Recommended to set <code class="code docutils literal notranslate"><span class="pre">True</span></code> if
+a <code class="docutils literal notranslate"><span class="pre">freezing_arr</span></code> is passed.</p></li>
+<li><p><strong>gpu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>dtype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.13)"><em>type</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_SupportsDType</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.3)"><em>dtype</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><em>Sequence</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.SupportsIndex" title="(in Python v3.13)"><em>SupportsIndex</em></a><em>]</em><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>] </em><em>| </em><em>_DTypeDict</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>op</strong> – Anisotropic diffusion operator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pyxu-org.github.io/api/info.ptype.html#pyxu.info.ptype.OpT" title="(in Project name not set v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpT</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+</section>
+</article>
+<footer class="bd-footer-article">
+<div class="footer-article-items footer-article__inner">
+<div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">API Reference</p>
+</div>
+</a>
+<a class="right-next" href="../examples/index.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Example Gallery</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div></div>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> On this page
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.MfiDiffusion"><code class="docutils literal notranslate"><span class="pre">MfiDiffusion</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.PeronaMalikDiffusion"><code class="docutils literal notranslate"><span class="pre">PeronaMalikDiffusion</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.TikhonovDiffusion"><code class="docutils literal notranslate"><span class="pre">TikhonovDiffusion</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.TotalVariationDiffusion"><code class="docutils literal notranslate"><span class="pre">TotalVariationDiffusion</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.CurvaturePreservingDiffusionOp"><code class="docutils literal notranslate"><span class="pre">CurvaturePreservingDiffusionOp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.AnisEdgeEnhancingDiffusionOp"><code class="docutils literal notranslate"><span class="pre">AnisEdgeEnhancingDiffusionOp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.AnisCoherenceEnhancingDiffusionOp"><code class="docutils literal notranslate"><span class="pre">AnisCoherenceEnhancingDiffusionOp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyxu_diffops.operator.AnisDiffusionOp"><code class="docutils literal notranslate"><span class="pre">AnisDiffusionOp</span></code></a></li>
+</ul>
+</nav></div>
+<div class="sidebar-secondary-item">
+<div id="searchbox"></div></div>
+<div class="sidebar-secondary-item">
+<div class="tocsection editthispage">
+<a href="https://github.com/dhamm97/https://github.com/dhamm97/pyxu-diffops/edit/main/doc/api/operator.rst">
+<i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+</div>
+</div>
+<div class="sidebar-secondary-item">
+<div class="tocsection sourcelink">
+<a href="../_sources/api/operator.rst">
+<i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+</div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+<footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+<div class="footer-items__start">
+<div class="footer-item">
+<p class="copyright">
+    
+      © Copyright 2025, Daniele Hamm &lt;daniele.hamm@epfl.ch&gt;.
+      <br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+</p>
+</div>
+<div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+</div>
+<div class="footer-items__end">
+<div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
