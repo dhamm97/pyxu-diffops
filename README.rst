@@ -29,7 +29,7 @@ Installation of ``pyxu-diffops`` will be made available via `pip`_ in the near f
 Notes
 -----
 
-Check out our documentation `documentation <https://dhamm97.github.io/pyxu-diffops/>`_ ! You can learn how to use ``pyxu-diffops`` by checking the ``API Reference`` section.
+Check out our `documentation <https://dhamm97.github.io/pyxu-diffops/>`_ ! You can learn how to use ``pyxu-diffops`` by checking the ``API Reference`` section.
 
 Unit testing and an improved example gallery are under development.
 
